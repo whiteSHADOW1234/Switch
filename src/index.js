@@ -1,13 +1,14 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path'); // node.js API 的 path 套件
-const globalShortcut = require('electron').globalShortcut; // 全域快捷鍵
-const Tray = require('electron').Tray; // 系統通知區
-const Menu = require('electron').Menu; // 應用程式選單
+import { app, BrowserWindow } from 'electron';
+import { join } from 'path'; // node.js API 的 path 套件
+import { globalShortcut } from 'electron'; // 全域快捷鍵
+import { Tray } from 'electron'; // 系統通知區
+import { Menu } from 'electron'; // 應用程式選單
+
 
 
 function createTray(win) {
 
-  const iconPath = path.join(__dirname, './imgs/tray.png');
+  const iconPath = join(__dirname, './imgs/tray.png');
   const tray = new Tray(iconPath)
   const contextMenu = Menu.buildFromTemplate([
       {
@@ -62,7 +63,7 @@ const createWindow = () => {
     width: 350,
     height: 350,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: join(__dirname, 'preload.js'),
     },
     frame: false,
     transparent: true,
@@ -71,7 +72,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(join(__dirname, 'index.html'));
   // // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 
@@ -115,7 +116,7 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 
 
-app.on('web-contents-created', (event, contents) => {
+app.on('web-contents-created', (_event, contents) => {
   contents.session.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
