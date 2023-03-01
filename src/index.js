@@ -5,7 +5,6 @@ import { Tray } from 'electron'; // 系統通知區
 import { Menu } from 'electron'; // 應用程式選單
 
 
-
 function createTray(win) {
 
   const iconPath = join(__dirname, './imgs/tray.png');
