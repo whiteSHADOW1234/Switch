@@ -4,7 +4,10 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        authors: 'My Name',
+        description: 'My Description',
+      },
     },
     {
       name: '@electron-forge/maker-zip',
@@ -12,11 +15,17 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        authors: 'My Name',
+        description: 'My Description',
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        authors: 'My Name',
+        description: 'My Description',
+      },
     },
   ],
 };

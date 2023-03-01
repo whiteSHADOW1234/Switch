@@ -1,8 +1,10 @@
-import { app, BrowserWindow } from 'electron';
-import { join } from 'path'; // node.js API 的 path 套件
-import { globalShortcut } from 'electron'; // 全域快捷鍵
-import { Tray } from 'electron'; // 系統通知區
-import { Menu } from 'electron'; // 應用程式選單
+const app = require('electron').app;
+const BrowserWindow = require('electron').BrowserWindow;
+const { join } = require('path'); // node.js API 的 path 套件
+const { globalShortcut } = require('electron'); // 全域快捷鍵
+const { Tray } = require('electron'); // 系統通知區
+const { Menu } = require('electron'); // 應用程式選單
+const AutoLaunch = require('auto-launch');
 
 
 function createTray(win) {
@@ -85,6 +87,14 @@ const createWindow = () => {
 app.on('ready', () => {
   const win = createWindow();
   createTray(win);
+  let autoLaunch = new AutoLaunch({
+      name: 'SWITCH!',
+      path: app.getPath('exe'),
+  });
+
+  autoLaunch.isEnabled().then((isEnabled) => {
+      if (!isEnabled) autoLaunch.enable();
+  });
 
       [1, 2, 3].map(number => {
             globalShortcut.register(`CommandOrControl+${number}`, () => {
